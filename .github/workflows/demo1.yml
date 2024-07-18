@@ -1,5 +1,9 @@
 name: Events Demo 1
 on:
+  # Note By default pull requests based on forks do not trigger a workflow.
+  # Reason: Malicious workflow runs & excessive resource consumption.
+  # First time contributors, we have to manually run the workflow.
+  # subsequent PRs will trigger the workflow.
   pull_request:
     types: opened
     branches:
