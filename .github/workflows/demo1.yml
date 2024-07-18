@@ -1,8 +1,23 @@
 name: Events Demo 1
 on:
+  # Note By default pull requests based on forks do not trigger a workflow.
+  # Reason: Malicious workflow runs & excessive resource consumption.
+  # First time contributors, we have to manually run the workflow.
+  # subsequent PRs will trigger the workflow.
   pull_request:
     types: opened
+    branches:
+      - main
+      - 'dev-*' # Matches dev-1, dev-2, etc.
+      - 'feat/**' # Matches feat/1, feat/new/2, etc.
   workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 'dev-*' # Matches dev-1, dev-2, etc.
+      - 'feat/**' # Matches feat/1, feat/new/2, etc.
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
